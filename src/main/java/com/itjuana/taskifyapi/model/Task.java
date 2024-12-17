@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
+@Entity
 public class Task {
+    @Id
     @NotNull
     private int id;
     @NotNull
