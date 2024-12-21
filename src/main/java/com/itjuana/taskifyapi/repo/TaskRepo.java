@@ -46,10 +46,16 @@ public class TaskRepo {
     }
 
     public void deleteTask(int id) {
+        Task taskToDelete = null;
+
         for (Task task : tasks) {
             if (task.getId() == id) {
-                tasks.remove(task);
+                taskToDelete = task;
             }
+        }
+
+        if (taskToDelete != null) {
+            tasks.remove(taskToDelete);
         }
     }
 }
