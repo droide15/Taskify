@@ -1,61 +1,76 @@
 package com.itjuana.taskifyapi.repo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.itjuana.taskifyapi.model.Task;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class TaskRepo {
 
-    List<Task> tasks = new ArrayList<>();
+    @Autowired
+    private JdbcTemplate jdbc;
 
-    public TaskRepo() {
-        tasks.add(new Task(1, "Prepare infraestructure", "Prepare the infraestructure", "Completed"));
+    public void save(Task t) {
+        String sql="insert into task(id,title,description,status) values(?,?,?,?)";
 
-        tasks.add(new Task(2, "Install equipement", "Install the equipement", "Pending"));
+        int rows=jdbc.update(sql,t.getId(),t.getTitle(),t.getDescription(),t.getStatus());
+        System.out.println(rows +" rows affected");
     }
 
-    public List<Task> getAllTasks() {
-        return tasks;
-    }
+    public List<Task> findAll() {
 
-    public void addTask(Task task) {
-        tasks.add(task);
+        String sql="select * from task";
+
+        RowMapper<Task> mapper=(rt, rowNum) ->
+        {
+            Task t=new Task();
+            t.setId(rt.getInt("id"));
+            t.setTitle(rt.getString("title"));
+            t.setDescription(rt.getString("description"));
+            t.setStatus(rt.getString("status"));
+            return t;
+        };
+
+        return jdbc.query(sql, mapper);
     }
 
     public Task getTask(int id) {
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                return task;
-            }
+        String sql="select * from task where id=?";
+
+        RowMapper<Task> mapper=(rt, rowNum) ->
+        {
+            Task t=new Task();
+            t.setId(rt.getInt("id"));
+            t.setTitle(rt.getString("title"));
+            t.setDescription(rt.getString("description"));
+            t.setStatus(rt.getString("status"));
+            return t;
+        };
+
+        List<Task> tasks = jdbc.query(sql, mapper, id);
+
+        if (!tasks.isEmpty()) {
+            return tasks.getFirst();
         }
 
         return null;
     }
 
-    public void updateTask(Task task) {
-        for (Task currentTask : tasks) {
-            if (currentTask.getId() == task.getId()) {
-                currentTask.setTitle(task.getTitle());
-                currentTask.setDescription(task.getDescription());
-                currentTask.setStatus(task.getStatus());
-            }
-        }
+    public void updateTask(Task t) {
+        String sql="update task set title=?, description=?,status=? where id=?";
+
+        int rows=jdbc.update(sql,t.getTitle(),t.getDescription(),t.getStatus(),t.getId());
+        System.out.println(rows +" rows affected");
     }
 
     public void deleteTask(int id) {
-        Task taskToDelete = null;
+        String sql="delete from task where id=?";
 
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                taskToDelete = task;
-            }
-        }
-
-        if (taskToDelete != null) {
-            tasks.remove(taskToDelete);
-        }
+        int rows=jdbc.update(sql,id);
+        System.out.println(rows +" rows affected");
     }
 }

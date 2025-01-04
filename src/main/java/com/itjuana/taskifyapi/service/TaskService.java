@@ -13,11 +13,11 @@ public class TaskService {
     public TaskRepo repo;
 
     public List<Task> getAllTasks() {
-        return repo.getAllTasks();
+        return repo.findAll();
     }
 
     public void addTask(Task task) {
-        repo.addTask(task);
+        repo.save(task);
     }
 
     public Task getTask(int id) {
