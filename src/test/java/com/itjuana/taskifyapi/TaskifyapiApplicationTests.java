@@ -63,7 +63,7 @@ class TaskifyapiApplicationTests {
 	// which should return a task object
 	// For it we need to mock the getTask function of the repository layer,
 	// which is called from inside the function being tested
-	/*@Test
+	@Test
 	public void testGetTask() {
 
 		Task expectedTask = new Task(1, "test title", "test description", "test status");
@@ -90,5 +90,5 @@ class TaskifyapiApplicationTests {
 		if (expectedObjectJson != null && actualObjectJson != null) {
 			assertEquals(expectedObjectJson, actualObjectJson);
 		}
-	}*/
+	}
 }
