@@ -22,18 +22,17 @@ public class TaskController {
     @GetMapping("tasks")
     public List<Task> getAllTasks() {
         return service.getAllTasks();
-
-    }
-
-    @GetMapping("/task/{id}")
-    public Task getTask(@PathVariable int id) {
-        return service.getTask(id);
     }
 
     @PostMapping("task")
     public Task addTask(@Valid @RequestBody Task task) {
         service.addTask(task);
         return service.getTask(task.getId());
+    }
+
+    @GetMapping("/task/{id}")
+    public Task getTask(@PathVariable int id) {
+        return service.getTask(id);
     }
 
     @PutMapping("task")

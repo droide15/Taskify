@@ -13,23 +13,23 @@ public class TaskService {
     public TaskRepo repo;
 
     public List<Task> getAllTasks() {
-        return repo.getAllTasks();
+        return repo.findAll();
     }
 
     public void addTask(Task task) {
-        repo.addTask(task);
+        repo.save(task);
     }
 
     public Task getTask(int id) {
 
-        return repo.getTask(id);
+        return repo.findById(id).orElse(null);
     }
 
     public void updateTask(Task task) {
-        repo.updateTask(task);
+        repo.save(task);
     }
 
     public void deleteTask(int id) {
-        repo.deleteTask(id);
+        repo.deleteById(id);
     }
 }

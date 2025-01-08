@@ -1,7 +1,8 @@
 package com.itjuana.taskifyapi.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
+@Entity
 public class Task {
+    @Id
     @NotNull
     private int id;
     @NotNull
@@ -19,4 +21,9 @@ public class Task {
     private String description;
     @NotNull
     private String status;
+
+    @Override
+    public String toString() {
+        return "Student [id=" + id + ", title=" + title + ", description=" + description + ", status=" + status + "]";
+    }
 }

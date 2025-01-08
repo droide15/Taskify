@@ -35,7 +35,7 @@ class TaskifyapiApplicationTests {
 		expectedTasks.add(new Task(1, "test title 1", "test description 1", "test status 1"));
 		expectedTasks.add(new Task(2, "test title 2", "test description 2", "test status 2"));
 
-		when(repo.getAllTasks()).thenReturn(expectedTasks);
+		when(repo.findAll()).thenReturn(expectedTasks);
 
 		List<Task> actualTasks = service.getAllTasks();
 
@@ -68,7 +68,7 @@ class TaskifyapiApplicationTests {
 
 		Task expectedTask = new Task(1, "test title", "test description", "test status");
 
-		when(repo.getTask(1)).thenReturn(expectedTask);
+		when(repo.findById(1).orElse(null)).thenReturn(expectedTask);
 
 		Task actualTask = service.getTask(1);
 
