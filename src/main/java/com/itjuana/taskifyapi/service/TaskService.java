@@ -22,14 +22,14 @@ public class TaskService {
 
     public Task getTask(int id) {
 
-        return repo.getTask(id);
+        return repo.findById(id).orElse(null);
     }
 
     public void updateTask(Task task) {
-        repo.updateTask(task);
+        repo.save(task);
     }
 
     public void deleteTask(int id) {
-        repo.deleteTask(id);
+        repo.deleteById(id);
     }
 }

@@ -68,7 +68,7 @@ class TaskifyapiApplicationTests {
 
 		Task expectedTask = new Task(1, "test title", "test description", "test status");
 
-		when(repo.getTask(1)).thenReturn(expectedTask);
+		when(repo.findById(1).orElse(null)).thenReturn(expectedTask);
 
 		Task actualTask = service.getTask(1);
 

@@ -1,8 +1,8 @@
 package com.itjuana.taskifyapi.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
-@Scope("prototype")
+@Entity
 public class Task {
+    @Id
     @NotNull
     private int id;
     @NotNull
