@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TaskService {
     @Autowired
-    public TaskRepo repo;
+    private TaskRepo repo;
 
     public List<Task> getAllTasks() {
         return repo.findAll();

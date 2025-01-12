@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -68,7 +69,7 @@ class TaskifyapiApplicationTests {
 
 		Task expectedTask = new Task(1, "test title", "test description", "test status");
 
-		when(repo.findById(1).orElse(null)).thenReturn(expectedTask);
+		when(repo.findById(1)).thenReturn(Optional.of(expectedTask));
 
 		Task actualTask = service.getTask(1);
 
