@@ -4,13 +4,16 @@ import java.util.List;
 
 import com.itjuana.taskifyapi.model.Task;
 import com.itjuana.taskifyapi.repo.TaskRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TaskService {
-    @Autowired
-    private TaskRepo repo;
+    private final TaskRepo repo;
+
+    // Constructor added for good practice and to remove the @Autowired annotation
+    public TaskService(TaskRepo repo) {
+        this.repo = repo;
+    }
 
     public List<Task> getAllTasks() {
         return repo.findAll();
@@ -21,7 +24,6 @@ public class TaskService {
     }
 
     public Task getTask(int id) {
-
         return repo.findById(id).orElse(null);
     }
 
