@@ -3,7 +3,6 @@ package com.itjuana.taskifyapi.controller;
 import com.itjuana.taskifyapi.model.Task;
 import com.itjuana.taskifyapi.service.TaskService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +10,12 @@ import java.util.List;
 @RestController
 public class TaskController {
 
-    @Autowired
-    private TaskService service;
+    private final TaskService service;
+
+    // Constructor added for good practice and to remove the @Autowired annotation
+    public TaskController(TaskService service) {
+        this.service = service;
+    }
 
     @GetMapping("health")
     public String health() {

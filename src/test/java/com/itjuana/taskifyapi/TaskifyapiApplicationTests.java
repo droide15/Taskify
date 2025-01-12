@@ -30,7 +30,7 @@ class TaskifyapiApplicationTests {
 	// For it we need to mock the getAllTasks function of the repository layer,
 	// which is called from inside the function being tested
 	@Test
-	public void testGetAllTasks() {
+	void testGetAllTasks() {
 
 		List<Task> expectedTasks = new ArrayList<>();
 		expectedTasks.add(new Task(1, "test title 1", "test description 1", "test status 1"));
@@ -65,7 +65,7 @@ class TaskifyapiApplicationTests {
 	// For it we need to mock the getTask function of the repository layer,
 	// which is called from inside the function being tested
 	@Test
-	public void testGetTask() {
+	void testGetTask() {
 
 		Task expectedTask = new Task(1, "test title", "test description", "test status");
 
